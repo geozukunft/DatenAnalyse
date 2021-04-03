@@ -1,5 +1,6 @@
 import asyncio
 import asyncpg
+import plotly.express as pe
 
 
 async def run():
@@ -12,7 +13,15 @@ async def run():
         """
     )
 
+    longestGame = 4565 // 60
+    endTime = [0] * longestGame
     for game in data:
+        endTime[game['duration'] // 60] += 1
+
+    figure = pe.line(x=range(longestGame),y=endTime)
+    figure.show()
+
+
 
 
 
